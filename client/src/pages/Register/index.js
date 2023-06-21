@@ -8,13 +8,13 @@ function Register() {
         <Form layout="vertical">
           <Form.Item
             label="Name"
-            name="email"
+            name="name"
           >
             < input type="text" placeholder="Name" />
           </Form.Item>
           <Form.Item
             label="Email"
-            name="email"
+            name="Email"
           >
             < input type="email" placeholder="Email" />
           </Form.Item>
