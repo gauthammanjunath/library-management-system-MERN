@@ -1,6 +1,8 @@
 input{
   height:40px;
   width:100%;
+  padding-left: 10px;
+  font-size:16px;
 }
   
 textarea,
@@ -23,9 +25,10 @@ textarea{
 
 input:focus , textarea:focus , select:focus {
   outline: none;
-  border: rgb(60, 60, 60) solid 1px;
+  border: rgb(9, 9, 9) solid 1px;
 }
 
 button {
   height: 40px;
+  color: blueviolet;
 }
