@@ -1,0 +1,28 @@
+{
+  "name": "library-management-system-mern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gauthammanjunath/library-management-system-MERN.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gauthammanjunath/library-management-system-MERN/issues"
+  },
+  "homepage": "https://github.com/gauthammanjunath/library-management-system-MERN#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "js": "^0.1.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.3.1",
+    "nodemon": "^1.19.4"
+  }
+}
