@@ -1,6 +1,6 @@
 const mongoose =require("mongoose");
 mongoose.set('strictQuery',false)
-mongoose.connect(process.env.mongo_url)
+mongoose.connect(process.env.mongo_local)
 
 const connection = mongoose.connection;
 connection.on('connected',()=> {
