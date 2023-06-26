@@ -30,7 +30,9 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: "pending", //active,inactive and pending
     },
-    timestamp: true
-}
+    
+},
+{timestamp: true}
 );
+
 module.exports = mongoose.model("users", userSchema);
