@@ -1,33 +1,33 @@
 const express = require("express");
 const router = express.Router();
-const user = require("../models/usersModel");
-const bcrypt = require("bcrypt");
+const User = require("../models/usersModel");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 //register a new user
 router.post("/register", async (req, res) => {
     try {
         //check if user already exists
-        const user = await UserActivation.findone({ email: req.body.email });
+        const user = await User.findOne({ email: req.body.email });
         if (user) {
             return res.send({
                 success: false,
-                message: "User already exists",
+                message: "Email already exists",
             });
         }
 
         //hash password
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = -await bcrypt.hash(req.body.password, salt);
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
         req.body.password = hashedPassword;
 
         //create a new user
-        const newUser = new UserActivation(req, body);
+        const newUser = new User(req.body);
         await newUser.save();
         return res.send({
             success: true,
-            message: error.message
-        })
+            message: "User created Successfully ,please login",
+        });
 
     } catch (error) {
         return res.send({
@@ -42,7 +42,7 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
     try {
         //Check if user exists
-        const user = await UserActivation.findone({ email: req.body.email });
+        const user = await user.findOne({ email: req.body.email });
         if (!user) {
             return res.send({
                 success: false,
@@ -65,7 +65,7 @@ router.post("/login", async (req, res) => {
         return res.send({
             success: true,
             message: "Login successful",
-            data: token
+            data: token,
 
         });
     } catch (error) {
