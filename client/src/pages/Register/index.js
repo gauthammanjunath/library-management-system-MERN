@@ -41,7 +41,7 @@ function Register() {
           </Form.Item>
           <Form.Item
             label="Phone Number"
-            name=" phone"
+            name="phone"
           >
             < input type="number" placeholder="Phone Number" />
           </Form.Item>

@@ -1,13 +1,22 @@
 import React from 'react';
-import { Form } from "antd";
+import { Form ,message } from "antd";
 import Button from '../../components/Button';
 import { Link } from 'react-router-dom';
-
+import{ LoginUser } from "../../apicalls/users";
 
 function Login() {
 
-  const onFinish = (values) => {
-    console.log("success:", values);
+  const onFinish = async (values) => {
+    try {
+      const response = await LoginUser(values);
+      if(response.success) {
+        message.success(response.message);
+      } else {
+        message.error(response.message);
+      }
+    } catch (error) {
+      message.error(error.message);  
+    }
   };
   return (
     <div className="h-screen  bg-primary flex items-center justify-center">
@@ -18,13 +27,13 @@ function Login() {
           onFinish={onFinish} className="mt-1">
           <Form.Item
             label="Email"
-            name="Email"
+            name="email"
           >
             < input type="email" placeholder="Email" />
           </Form.Item>
           <Form.Item
             label="Password"
-            name="Password"
+            name="password"
           >
             < input type="password" placeholder="Password" />
           </Form.Item>

@@ -9,6 +9,7 @@ router.post("/register", async (req, res) => {
     try {
         //check if user already exists
         const user = await User.findOne({ email: req.body.email });
+       
         if (user) {
             return res.send({
                 success: false,
@@ -41,19 +42,22 @@ router.post("/register", async (req, res) => {
 //login a user
 router.post("/login", async (req, res) => {
     try {
+        console.log("Login request received:", req.body);
+
         //Check if user exists
-        const user = await user.findOne({ email: req.body.email });
+        const user = await User.findOne({ email:req.body.email });
+      
         if (!user) {
             return res.send({
                 success: false,
-                message: "user does not exist",
+                message: "User does not exist",
             });
         }
         //Check if password is correct
-        const validpassword = await bcrypt.compare(
+        const validPassword = await bcrypt.compare(
             req.body.password,
-            user.password
-        )
+            user.password,
+        );
         if (!validPassword) {
             return res.send({
                 success: false,
@@ -61,19 +65,17 @@ router.post("/login", async (req, res) => {
             });
         }
         //create and assign a token
-        const token = jwt.sign({ userId: user._id }, process.env.jwt_secret, { expiresIn: "1d" });
+        const token = jwt.sign({ userId: user._id }, process.env.jwt_secret, { expiresIn: "1d", });
         return res.send({
             success: true,
             message: "Login successful",
             data: token,
-
         });
     } catch (error) {
         return res.send({
             success: false,
             message: error.message,
         });
-
     }
 });
 module.exports = router;
