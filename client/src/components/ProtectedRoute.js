@@ -1,18 +1,18 @@
 import React, { useEffect ,useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import { GetLoggedInUserDetails } from '../apicalls/users';
+import { GetLoggedInUserDetails ,GetUserDetails } from '../apicalls/users';
 import { message } from 'antd';
 
 function ProtectedRoute({ children }) {
     const navigate = useNavigate();
-    const [ user,setUser] = useState(null);
+    const [ user ,SetUser] = useState(null);
   
     const validateUserToken = async () => {
       try {
         const response = await GetLoggedInUserDetails();
         
         if (response.success) {
-          //dispatch(SetUser(response.data));
+          SetUser(response.data);
         } else {
           //localStorage.removeItem("token");
           //navigate("/login");
@@ -34,8 +34,16 @@ useEffect(() => {
         validateUserToken();
     }
 }, []);
-return
-<div>{user && children}</div>; 
-}
+return <div>
+  {user && (
+  <>
+    {user.name}
+    {user.email}
+    {user.role}
+    {children}
+    </>
+)}
+</div>
+};
 
 export default ProtectedRoute;

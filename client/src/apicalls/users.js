@@ -21,7 +21,7 @@ export const LoginUser =async(payload)=>{
     }
 };
 
-//get user details
+//get loggedInuser details
 export const GetLoggedInUserDetails = async () => {
     try {
       const response = await axiosInstance.get("/api/users/get-logged-in-user");
