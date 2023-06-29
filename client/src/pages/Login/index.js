@@ -1,18 +1,18 @@
-import React from 'react';
+import React ,{useEffect} from 'react';
 import { Form ,message } from "antd";
 import Button from '../../components/Button';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate } from 'react-router-dom';
 import{ LoginUser } from "../../apicalls/users";
 
 function Login() {
-
+  const navigate =useNavigate();
   const onFinish = async (values) => {
     try {
       const response = await LoginUser(values);
       if(response.success) {
         message.success(response.message);
         localStorage.setItem("token" ,response.data) ;
-        window.location.href ="/";
+        navigate("/");
       } else {
         message.error(response.message);
       }
@@ -20,6 +20,12 @@ function Login() {
       message.error(error.message);  
     }
   };
+  useEffect(()=>{
+  const token=localStorage.getItem("token");
+  if(token) {
+    window.location.href ="/";
+  }
+  },[]);
   return (
     <div className="h-screen  bg-primary flex items-center justify-center">
       <div className="authentication-form bg-white p-3">

@@ -3,6 +3,6 @@
     "ignore": ["./client"],
     "execMap": {
       "rb " : "ruby",
-      "pde""processing --sketch={{pwd}} --run"
+      "pde":"processing --sketch={{pwd}} --run"
     }
   }

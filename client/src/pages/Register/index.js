@@ -1,11 +1,11 @@
-import React from 'react';
+import React ,{useEffect} from 'react';
 import { Form ,message} from "antd";
 import Button from '../../components/Button';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
 import { RegisterUser } from '../../apicalls/users';
 
 function Register() {
-
+  const navigate =useNavigate();
   const onFinish = async (values) => {
     try {
       const response = await RegisterUser(values);
@@ -19,6 +19,12 @@ function Register() {
       
     }
   };
+  useEffect(()=>{
+    const token=localStorage.getItem("token");
+    if(token) {
+      window.location.href = "/";
+    }
+    },[]);
   return (
     <div className="h-screen  bg-primary flex items-center justify-center">
       <div className="authentication-form bg-white p-3">
