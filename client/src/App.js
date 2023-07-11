@@ -9,7 +9,8 @@ import './stylesheets/sizes.css';
 import './stylesheets/theme.css';
 import './stylesheets/form-elements.css';
 import ProtectedRoute from './components/ProtectedRoute';
-
+import { useSelector } from 'react-redux';
+import Loader from "./components/Loader";
 
 function App() {
   const {loading}= useSelector((state)=> state.loaders);

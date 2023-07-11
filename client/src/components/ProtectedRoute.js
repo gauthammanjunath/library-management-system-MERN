@@ -1,52 +1,59 @@
-import React, { useEffect  } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
-import { GetLoggedInUserDetails ,GetUserDetails } from '../apicalls/users';
+import { GetLoggedInUserDetails } from '../apicalls/users';
 import { message } from 'antd';
-import { useDispatch ,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SetUser } from '../redux/usersSlice';
+import { HideLoading, ShowLoading } from '../redux/loadersSlice';
 
 function ProtectedRoute({ children }) {
-    const navigate = useNavigate();
-    const {user} =useSelector(state=>state.users)
-    const dispatch =useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector(state => state.users)
+  const dispatch = useDispatch();
 
-    const validateUserToken = async () => {
-      try {
-        const response = await GetLoggedInUserDetails();
-        
-        if (response.success) {
-          SetUser(response.data);
-        } else {
-          //localStorage.removeItem("token");
-          //navigate("/login");
-          message.error(response.message);
-        }
-      } catch (error) {
+  const validateUserToken = async () => {
+    try {
+      dispatch(ShowLoading());
+      const response = await GetLoggedInUserDetails();
+      dispatch(HideLoading());
+      if (response.success) {
+        dispatch(SetUser(response.data));
+      } else {
         //localStorage.removeItem("token");
-        //navigate("/login");
-       // dispatch(HideLoading());
-        message.error(error.message);
+       // navigate("/login");
+        message.error(response.message);
       }
-    };
+    } catch (error) {
+      dispatch(HideLoading());
+      message.error(error.message);
 
-useEffect(() => {
+    }
+  };
+
+  useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-        navigate("/login");
+      navigate("/login");
     } else {
-        validateUserToken();
+      validateUserToken();
     }
-}, []);
-return <div>
-  {user && (
-  <>
-    {user.name}
-    {user.email}
-    {user.role}
-    {children}
-    </>
-)}
-</div>
+  }, []);
+  return <div>
+    {user && (
+      <div className="p-1">
+        <div className='header p-2 bg-primary flex justify-cennter'>
+          <h1 className='text-2xl text-white font-bold'> SRH LIBRARY</h1>
+           
+           <div 
+           className='flex items-center'
+           >
+            
+            </div>
+        </div>
+        <div className='content'>{children}</div>
+      </div>
+    )}
+    </div>
 };
 
 export default ProtectedRoute;
