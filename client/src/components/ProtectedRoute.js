@@ -34,26 +34,38 @@ function ProtectedRoute({ children }) {
     const token = localStorage.getItem("token");
     if (!token) {
       navigate("/login");
-    } else {
+    } else 
+    {
       validateUserToken();
     }
   }, []);
-  return <div>
+  
+  return (
+  <div>
     {user && (
       <div className="p-1">
-        <div className='header p-2 bg-primary flex justify-cennter'>
-          <h1 className='text-2xl text-white font-bold'> SRH LIBRARY</h1>
-           
+        <div className='header p-2 bg-primary flex justify-between rounded item-center'>
+          <h1 className='text-2xl text-white font-bold cursor-pointer'
+           onClick={()=>navigate("/")}
+           > SRH LIBRARY</h1>
+          
            <div 
-           className='flex items-center'
+           className='flex items-center gap-1 bg-white p-1 rounded'
            >
-            
+            <i className="ri-shield-user-line "></i>
+            <span className="text-sm underline "
+            onClick={()=> navigate("/profile")}>{user.name.toUpperCase()}</span>
+              <i className="ri-logout-box-r-line ml-2 "
+              onClick={()=>{localStorage.removeItem("token");
+              navigate("/login");}}
+              ></i>
             </div>
         </div>
-        <div className='content'>{children}</div>
+        <div className='content mt-1'>{children}</div>
       </div>
     )}
     </div>
-};
+  );
+}
 
 export default ProtectedRoute;

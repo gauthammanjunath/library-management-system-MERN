@@ -34,7 +34,7 @@ function Register() {
     },[]);
   return (
     <div className="h-screen  bg-primary flex items-center justify-center">
-      <div className="authentication-form bg-white p-3">
+      <div className="authentication-form bg-white p-3 rounded">
         <h1 className="text-primary text-2xl font-bold mb-1"><Link to="https://www.srh-hochschule-heidelberg.de/landingpage/dein-studium-im-bereich-nachhaltigkeitsmanagement-in-heidelberg/?gclid=Cj0KCQjwqNqkBhDlARIsAFaxvwyvQBmaYZpnKVAiPZSNKTnx0hjK6ukXlpMw2zUbbl6czPDY14mcTVIaAgpcEALw_wcB">SRH Hochschule Library </Link></h1>
         <hr />
         <Form layout="vertical"

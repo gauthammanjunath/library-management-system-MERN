@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Profile from './pages/Profile';
 
 import './stylesheets/allignements.css';
 import './stylesheets/custom.css';
@@ -13,14 +14,16 @@ import { useSelector } from 'react-redux';
 import Loader from "./components/Loader";
 
 function App() {
-  const {loading}= useSelector((state)=> state.loaders);
+  const { loading } = useSelector((state) => state.loaders);
   return (
     <div>
 
-      {loading&& <Loader/>}
+      {loading && <Loader />}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ProtectedRoute ><Home/>
+          <Route path="/" element={<ProtectedRoute ><Home />
+          </ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><Profile/>
           </ProtectedRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
