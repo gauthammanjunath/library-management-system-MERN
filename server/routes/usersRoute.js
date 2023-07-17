@@ -101,5 +101,20 @@ router.get("/get-logged-in-user", authMiddleware, async (req, res) => {
       });
     }
   });
-  
+  //get all the users (patrons)
+  router.get("/get-all-users/:role", authMiddleware, async (req, res) => {
+    try {
+      const users = await User.find({ role:"patron" });
+      return res.send({
+        success: true,
+        message: "Users fetched successfully",
+        data: users,
+      });
+    } catch (error) {
+      return res.send({
+        success: false,
+        message: error.message,
+      });
+    }
+  });
 module.exports = router;

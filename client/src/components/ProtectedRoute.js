@@ -19,11 +19,12 @@ function ProtectedRoute({ children }) {
       if (response.success) {
         dispatch(SetUser(response.data));
       } else {
-        //localStorage.removeItem("token");
-       // navigate("/login");
+        localStorage.removeItem("token");
+         navigate("/login");
         message.error(response.message);
       }
     } catch (error) {
+      navigate("/login")
       dispatch(HideLoading());
       message.error(error.message);
 

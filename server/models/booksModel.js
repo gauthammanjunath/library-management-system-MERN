@@ -4,40 +4,46 @@ const bookSchema = new mongoose.Schema({
 
     title: {
         type: String,
-        required: true
+        required: true,
     },
     description: {
         type: String,
-        required: true
+        required: true,
+    },
+    category :{
+        type:String, 
+        required:true,
     },
     image: {
         type: String,
-        required: true
+        required: true,
     },
     author: {
         type: String,
-        required: true
+        required: true,
     },
     publisher: {
         type: String,
-        required: true
+        required: true,
     },
     publishedOn: {
         type: String,
-        required: true
+        required: true,
     },
     rentPerDay: {
         type: Number,
-        required: true
+        required:true,
     },
     totalCopies: {
         type: Number,
-        required: true
+        required: true,
     },
     availableCopies: {
-        type: Number,
-        required: true
+        type: Number, 
+        required: false ,
+
     },
+
     createdBy : {
         type: mongoose.Schema.Types.ObjectId,
         ref:"users",
@@ -45,5 +51,5 @@ const bookSchema = new mongoose.Schema({
     }
 
 },
-{timestamps:true});
+{timestamps:true,});
 module.exports= mongoose.model("books",bookSchema);
