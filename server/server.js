@@ -7,12 +7,12 @@ const port = process.env.PORT || 6000;
 
 const usersRoute=require("./routes/usersRoute");
 const booksRoute=require("./routes/booksRoute");
-
+const issuesRoute=require("./routes/issuesRoute");  
 
 
 app.use("/api/users",usersRoute);
 app.use("/api/books",booksRoute);
-
+app.use( "/api/books",issuesRoute);
 
 app.listen(port, () => {
     console.log(`Hello, World! Server is running on port ${port}`);

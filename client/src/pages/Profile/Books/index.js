@@ -6,11 +6,13 @@ import { GetAllBooks ,DeleteBook } from "../../../apicalls/books";
 import { HideLoading, ShowLoading } from "../../../redux/loadersSlice";
 import { Table, message } from "antd";
 import moment from "moment";
+import Issues from "./Issues";
 
 function Books() {
   const[formType,setFormType] =useState('add')
   const[selectedBook, setSelectedBook] = useState(null)
   const [openBookForm, setOpenBookForm] = React.useState(false);
+  const [openIssues, setOpenIssues] = React.useState(false);
   const [books, setBooks] = React.useState([]);
   const dispatch = useDispatch();
 
@@ -98,6 +100,13 @@ function Books() {
             setSelectedBook(record);
             setOpenBookForm(true);
           }}></i>
+          <span className="underline" 
+          onClick={()=>{
+            setOpenIssues(true);
+            setSelectedBook(record);
+          }}
+            >Issues
+          </span>
         </div>
       ),
     }
@@ -118,6 +127,10 @@ function Books() {
         formType={formType}
         selectedBook={selectedBook}
         setSelectedBook={setSelectedBook}/>
+      )}
+      {openIssues && (
+        <Issues open={openIssues} setOpen={setOpenIssues} selectedBook={setSelectedBook}
+    />
       )}
     </div>
   );
