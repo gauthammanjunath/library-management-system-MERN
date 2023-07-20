@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal } from 'antd';
-
+import IssueForm from './IssueForm';
 
 function Issues({open =false ,setOpen,selectedBook }) {
   return (

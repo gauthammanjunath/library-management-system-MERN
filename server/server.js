@@ -12,7 +12,7 @@ const issuesRoute=require("./routes/issuesRoute");
 
 app.use("/api/users",usersRoute);
 app.use("/api/books",booksRoute);
-app.use( "/api/books",issuesRoute);
+app.use("/api/issues",issuesRoute);
 
 app.listen(port, () => {
     console.log(`Hello, World! Server is running on port ${port}`);

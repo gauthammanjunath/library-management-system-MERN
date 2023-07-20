@@ -13,7 +13,7 @@ router.post("/issue-new-book", authMiddleware, async (req, res) => {
       );
   
       // issue book to patron (create new issue record)
-      const newIssue = new Issue(req.body);
+      const newIssue = new Issues(req.body);
       await newIssue.save();
       return res.send({
         success: true,
@@ -27,3 +27,5 @@ router.post("/issue-new-book", authMiddleware, async (req, res) => {
       });
     }
   });
+
+module.exports =router;
