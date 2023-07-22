@@ -41,3 +41,12 @@ export const DeleteBook = async (id)=> {
         throw error;
     } 
 }
+//issue a book 
+export const IssueBook = async (payload)=> {
+    try{
+        const response = await axiosInstance.post("/api/books/issue-book",payload);
+        return response.data;
+    } catch (error) {
+        throw error;
+    } 
+}

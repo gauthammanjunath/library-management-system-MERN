@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Modal,Form } from 'antd';
+import { Modal,Form, message } from 'antd';
 import moment from 'moment';
 import Button from '../../../components/Button';
-import { useDispatch } from 'react-redux';
+import { useDispatch ,useSelector} from 'react-redux';
 import { HideLoading, ShowLoading } from '../../../redux/loadersSlice';
 import { GetUserById } from "../../../apicalls/users";
+import { IssueBook } from '../../../apicalls/issues';
 
 function IssueForm({
   open = false,
@@ -12,7 +13,8 @@ function IssueForm({
   selectedBook,
   setSelectedBook,
   type,
-})     {
+ })  {
+  const { user } = useSelector((state) => state.users);
   const[validated ,setValidated]=React.useState("");
   const[errorMessage ,setErrorMessage]=React.useState("");
   const[patronData ,setPatronData]=useState(null);
@@ -46,7 +48,43 @@ function IssueForm({
     setErrorMessage(error.message);
   }
     };
-
+    const onIssue = async () => {
+      try {
+        dispatch(ShowLoading());
+        let response = null;
+        if (type !== "edit") {
+          response = await IssueBook({
+            book: selectedBook._id,
+            user: patronData._id,
+            issueDate: new Date(),
+            returnDate,
+            rent:
+              moment(returnDate).diff(moment(), "days") *
+              selectedBook?.rentPerDay,
+            fine: 0,
+            issuedBy: user._id,
+          });
+          dispatch(HideLoading());
+          if (response.success) {
+            message.success(response.message);
+           // getData();
+            setPatronId("");
+            setReturnDate("");
+            setValidated(false);
+            setErrorMessage("");
+            setSelectedBook(null);
+            setOpen(false);
+          }else{
+            setErrorMessage(response.message);
+          }
+        } else {
+          message.error(response.message);
+        }
+      } catch (error) {
+        dispatch(HideLoading());
+        message.error(error.message);
+      }
+    };
   return (
   <Modal  title="Issue Form " open={open} onCancel={()=>setOpen(false)}
   footer= {null}>
@@ -99,12 +137,12 @@ function IssueForm({
             onClick={validate}
           />
 
-          {validated &&<Button title="Issue"
+          {validated &&<Button title="Issue" onClick={onIssue}
           disabled={patronId === "" || returnDate === ""}
        />}
 
           </div>
-        </div>
+        </div> 
   </Modal>
   );
 }
