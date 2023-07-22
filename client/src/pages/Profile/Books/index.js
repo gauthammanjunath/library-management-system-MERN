@@ -130,7 +130,7 @@ function Books() {
           onClick={() => {
             setFormType("add");
             setSelectedBook(null);
-            setOpenBookForm(true)}} />
+            setOpenBookForm(true);}} />
       </div>
       <Table columns={columns} dataSource={books} className="mt-1" />
       {openBookForm && (
@@ -152,6 +152,7 @@ function Books() {
           selectedBook={selectedBook}
           setSelectedBook={setSelectedBook}
           getData={getBooks}
+          type="add"
         />
       )}
 

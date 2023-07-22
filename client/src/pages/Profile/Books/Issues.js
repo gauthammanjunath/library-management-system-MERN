@@ -134,13 +134,25 @@ const columns =[
   return (
     <Modal title=" " open={open} onCancel={()=>setOpen(false)}
       footer= {null} width={1400} centered >
-         <h1 className="text-xl mt-1 mb-1 text-secondary uppercase font-bold text-center">
-        Issues of {selectedBook.title}
-      </h1>
+       
    <Table
    columns={columns}
    dataSource={issues}
    />
+   {showIssueForm && (
+        <IssueForm
+          selectedBook={selectedBook}
+          selectedIssue={selectedIssue}
+          open={showIssueForm}
+          setOpen={setShowIssueForm}
+          setSelectedBook={() => {}}
+          getData={()=>{
+            getIssues();
+            reloadBooks();
+          }}
+          type="edit"
+        />
+      )}
     </Modal>
   );
 }

@@ -81,7 +81,7 @@ function IssuedBooks({ showIssuedBooks, setShowIssuedBooks, selectedUser }) {
 
       <Table columns={columns} dataSource={issuedBooks} />
   </Modal>
-);
+); 
 }
 
 export default IssuedBooks;
