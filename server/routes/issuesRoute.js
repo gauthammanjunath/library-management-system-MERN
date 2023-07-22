@@ -27,5 +27,23 @@ router.post("/issue-new-book", authMiddleware, async (req, res) => {
       });
     }
   });
+  // get issues
+router.post("/get-issues", authMiddleware, async (req, res) => {
+  try {
+    delete req.body.userIdFromToken;
+    const issues = await Issue.find(req.body).populate("book").populate("user");
+    return res.send({
+      success: true,
+      message: "Issues fetched successfully",
+      data: issues,
+    });
+  } catch (error) {
+    return res.send({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
 
 module.exports =router;

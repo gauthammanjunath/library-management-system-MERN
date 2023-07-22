@@ -12,6 +12,7 @@ function IssueForm({
   setOpen, 
   selectedBook,
   setSelectedBook,
+  getData,
   type,
  })  {
   const { user } = useSelector((state) => state.users);
@@ -67,7 +68,7 @@ function IssueForm({
           dispatch(HideLoading());
           if (response.success) {
             message.success(response.message);
-           // getData();
+            getData();
             setPatronId("");
             setReturnDate("");
             setValidated(false);

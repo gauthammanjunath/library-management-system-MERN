@@ -8,4 +8,14 @@ export const IssueBook = async (payload)=> {
     } catch (error) {
         throw error;
     } 
+
+}
+//get issues
+export const GetIssues = async (payload) => {
+    try {
+      const response = await axiosInstance.post("/api/issues/get-issues" , payload);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
 }
