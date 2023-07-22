@@ -39,4 +39,13 @@ export const GetLoggedInUserDetails = async () => {
       throw error;
     }
   };
-  
+  //// get user by id
+
+export const GetUserById = async (id) => {
+  try {
+    const response = await axiosInstance.get(`/api/users/get-user-by-id/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}

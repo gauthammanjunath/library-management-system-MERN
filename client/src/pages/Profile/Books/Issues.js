@@ -4,8 +4,9 @@ import IssueForm from './IssueForm';
 
 function Issues({open =false ,setOpen,selectedBook }) {
   return (
-    <Modal title="Issue Book " open={open} onCancel={()=>setOpen(false)}>
-    <div>Issues</div>
+    <Modal title="Issues " open={open} onCancel={()=>setOpen(false)}
+      footer= {null} width={1000} >
+    <div>Issue List</div>
     </Modal>
   );
 }

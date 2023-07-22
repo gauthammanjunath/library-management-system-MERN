@@ -7,12 +7,14 @@ import { HideLoading, ShowLoading } from "../../../redux/loadersSlice";
 import { Table, message } from "antd";
 import moment from "moment";
 import Issues from "./Issues";
+import IssueForm from "./IssueForm";
 
 function Books() {
   const[formType,setFormType] =useState('add')
   const[selectedBook, setSelectedBook] = useState(null)
   const [openBookForm, setOpenBookForm] = React.useState(false);
   const [openIssues, setOpenIssues] = React.useState(false);
+  const [openIssuesForm, setOpenIssuesForm] = React.useState(false);
   const [books, setBooks] = React.useState([]);
   const dispatch = useDispatch();
 
@@ -106,12 +108,21 @@ function Books() {
             setSelectedBook(record);
           }}
             >Issues
-          </span>
+            </span>
+
+            <span
+            className="underline"
+            onClick={() => {
+              setOpenIssuesForm(true);
+              setSelectedBook(record);
+            }}
+          >
+            Issue Book
+            </span>
         </div>
       ),
-    }
-
-  ]
+    },
+  ];
   return (
     <div>
       <div className='flex justify-end'>
@@ -132,6 +143,16 @@ function Books() {
         <Issues open={openIssues} setOpen={setOpenIssues} selectedBook={setSelectedBook}
     />
       )}
+
+{openIssuesForm && (
+        <IssueForm
+          open={openIssuesForm}
+          setOpen={setOpenIssuesForm}
+          selectedBook={selectedBook}
+          setSelectedBook={setSelectedBook}
+        />
+      )}
+
     </div>
   );
 }

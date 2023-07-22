@@ -117,4 +117,27 @@ router.get("/get-logged-in-user", authMiddleware, async (req, res) => {
       });
     }
   });
+  //get user byid 
+  router.get("/get-user-by-id/:id", authMiddleware, async (req, res) => {
+    try {
+      const user = await User.findById(req.params.id);
+      if (!user) {
+        return res.send({
+          success: false,
+          message: "User does not exist",
+        });
+      }
+      return res.send({
+        success: true,
+        message: "User fetched successfully",
+        data: user,
+      });
+  
+    } catch (error) {
+      return res.send({
+        success: false,
+        message: 'User does not exist',
+      });
+    }
+  });
 module.exports = router;
