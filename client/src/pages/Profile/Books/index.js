@@ -141,6 +141,7 @@ function Books() {
       )}
       {openIssues && (
         <Issues open={openIssues} setOpen={setOpenIssues} selectedBook={setSelectedBook}
+        reloadBooks={getBooks}
     />
       )}
 

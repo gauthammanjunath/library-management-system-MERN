@@ -44,6 +44,38 @@ router.post("/get-issues", authMiddleware, async (req, res) => {
     });
   }
 });
+// return a book
+router.post("/return-book", authMiddleware, async (req, res) => {
+  try {
+    // inventory adjustment (available copies must be incremented by 1)
+    await Book.findOneAndUpdate(
+      {
+        _id: req.body.book,
+      },
+      {
+        $inc: { availableCopies: 1 },
+      }
+    );
+
+    // return book (update issue record)
+    await Issue.findOneAndUpdate(
+      {
+        _id: req.body._id,
+      },
+      req.body
+    );
+
+    return res.send({
+      success: true,
+      message: "Book returned successfully",
+    });
+  } catch (error) {
+    return res.send({
+      success: false,
+      message: error.message,
+    });
+  }
+});
 
 
 module.exports =router;
