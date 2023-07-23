@@ -2,7 +2,6 @@ import React from 'react';
 import { Tabs } from 'antd';
 import Books from './Books';
 import Users from './Users';
-import Reports from './Reports';
 import BasicDetails from './BasicDetails';
 import { useSelector } from 'react-redux';
 import BorrowedBooks from './BorrowedBooks';
@@ -45,11 +44,7 @@ function Profile() {
             <Users role="admin" />
           </TabPane>
         )}
-        {role === "admin" && (
-          <TabPane tab="Reports" key="7">
-            <Reports />
-          </TabPane>
-        )}
+
       </Tabs>
     </div>
   );

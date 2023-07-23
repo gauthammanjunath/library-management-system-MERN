@@ -24,7 +24,7 @@ function IssueForm({
   const[returnDate, setReturnDate]=React.useState (type === "edit" ? moment(selectedIssue.returnDate).format("YYYY-MM-DD") : ""
   );
   const dispatch=useDispatch();
-
+  console.log(selectedBook._id)
   const validate= async() =>{
   try {
     dispatch(ShowLoading());
@@ -105,6 +105,7 @@ function IssueForm({
         validate();
       }
     }, [open]);
+    console.log(type)
 
   return (
   <Modal  title="Issue Form " open={open} onCancel={()=>setOpen(false)}
@@ -144,7 +145,7 @@ function IssueForm({
             </h1>
               <h1>Rent per Day : {selectedBook.rentPerDay}</h1>
               <h1>
-              Rent :{" "}
+              Rent :
               {moment(returnDate).diff(moment(), "days") *
                 selectedBook?.rentPerDay}
             </h1>
@@ -156,7 +157,7 @@ function IssueForm({
             variant="outlined"
             onClick={() => setOpen(false)}
           />
-               {!type === "edit" && (
+               {type === "add" && (
                  <Button
             title="Validate"
             disabled={patronId === "" || returnDate === ""}
@@ -169,7 +170,6 @@ function IssueForm({
               disabled={patronId === "" || returnDate === ""}
             />
           )}
-
           </div>
         </div> 
   </Modal>

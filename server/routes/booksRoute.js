@@ -40,7 +40,7 @@ router.get("/get-all-books",authMiddleware,async (req,res)=>{
     }
 });
 //get a bok by id 
-router.get("/get-book -by-id/:id",authMiddleware,async (req,res)=>{
+router.get("/get-book-by-id/:id",authMiddleware,async (req,res)=>{
     try{
         const books =await Book.findById(req.params.id);
         return res.send({success:true,data:books});

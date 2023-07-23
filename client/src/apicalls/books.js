@@ -41,3 +41,12 @@ export const DeleteBook = async (id)=> {
         throw error;
     } 
 }
+// get book by id
+export const GetBookById = async (id) => {
+    try {
+      const response = await axiosInstance.get(`/api/books/get-book-by-id/${id}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }

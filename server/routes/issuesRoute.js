@@ -42,7 +42,7 @@ router.post("/get-issues", authMiddleware, async (req, res) => {
       success: false,
       message: error.message,
     });
-  }
+  } 
 });
 // return a book
 router.post("/return-book", authMiddleware, async (req, res) => {

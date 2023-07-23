@@ -140,7 +140,8 @@ function Books() {
         setSelectedBook={setSelectedBook}/>
       )}
       {openIssues && (
-        <Issues open={openIssues} setOpen={setOpenIssues} selectedBook={setSelectedBook}
+        <Issues open={openIssues} setOpen={setOpenIssues} selectedBook={selectedBook} 
+        setSelectedBook={setSelectedBook}
         reloadBooks={getBooks}
     />
       )}

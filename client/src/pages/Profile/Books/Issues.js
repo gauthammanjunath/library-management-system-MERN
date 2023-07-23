@@ -13,6 +13,7 @@ function Issues({open =false ,setOpen,selectedBook ,reloadBooks }) {
   const [selectedIssue, setSelectedIssue] = React.useState(null);
   const [showIssueForm, setShowIssueForm] = React.useState(false);
   const dispatch=useDispatch();
+  console.log(selectedBook)
   const getIssues = async () => {
     try {
       dispatch(ShowLoading());
