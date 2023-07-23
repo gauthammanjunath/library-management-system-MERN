@@ -5,7 +5,7 @@ import Button from '../../../components/Button';
 import { useDispatch ,useSelector} from 'react-redux';
 import { HideLoading, ShowLoading } from '../../../redux/loadersSlice';
 import { GetUserById } from "../../../apicalls/users";
-import { IssueBook } from '../../../apicalls/issues';
+import { EditIssue, IssueBook } from '../../../apicalls/issues';
 
 function IssueForm({
   open = false,
@@ -66,6 +66,19 @@ function IssueForm({
               selectedBook?.rentPerDay,
             fine: 0,
             issuedBy: user._id,
+          });
+        } else {
+          response = await EditIssue({
+            book: selectedBook._id,
+            user: patronData._id,
+            issueDate: selectedIssue.issueDate,
+            returnDate,
+            rent:
+              moment(returnDate).diff(moment(), "days") *
+              selectedBook?.rentPerDay,
+            fine: 0,
+            issuedBy: user._id,
+            _id: selectedIssue._id,
           });
         }
           dispatch(HideLoading());
@@ -143,7 +156,7 @@ function IssueForm({
             variant="outlined"
             onClick={() => setOpen(false)}
           />
-               {type === "add" && (
+               {!type === "edit" && (
                  <Button
             title="Validate"
             disabled={patronId === "" || returnDate === ""}

@@ -31,7 +31,7 @@ router.post("/issue-new-book", authMiddleware, async (req, res) => {
 router.post("/get-issues", authMiddleware, async (req, res) => {
   try {
     delete req.body.userIdFromToken;
-    const issues = await Issue.find(req.body).populate("book").populate("user");
+    const issues = await Issue.find(req.body).populate("book").populate("user").sort({issueDate:-1});
     return res.send({
       success: true,
       message: "Issues fetched successfully",
@@ -76,6 +76,16 @@ router.post("/return-book", authMiddleware, async (req, res) => {
     });
   }
 });
-
+//edit an issue 
+router.post("/edit-issue", authMiddleware, async (req, res) => {
+  try {
+    await Issue.findOneAndUpdate({
+      _id: req.body._id,
+    }, req.body);
+    res.send({ success: true, message: "Issue updated successfully" });
+  } catch (error) {
+    res.send({ success: false, message: error.message });
+  }
+});
 
 module.exports =router;
